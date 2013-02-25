@@ -7,7 +7,10 @@ by [Cameron Lerch](http://brightflock.com)
 
 ## DESCRIPTION ##
 
-* This plugin integrates with the iOS6+ social framework to provide social sharing.
+* This plugin integrates with the iOS6+ social framework to provide social sharing. Features are only available on devices with
+  iOS6+--if this is not acceptable look at sharekit.
+
+* Very lightweight as it relies on iOS's social framework. The plugin can be seen as a lightweight alternative to the very heavy sharekit.
 
 * Requires the social framework to be added as "Optional" to your xcode project.
 
