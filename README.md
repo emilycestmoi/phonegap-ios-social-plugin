@@ -53,7 +53,10 @@ window.plugins.social.share('This is the message you want to share', 'http://som
 The message and url are trivial. The image is a file on the device itself. I actually haven't tested passing an image url to see if the social framework
 will deal with it or not, but I suspect it may.
 
-The share services that are available are dictated by what has been setup in the iOS device settings by the user.
+The share services that are available are dictated by what has been setup in the iOS device settings by the user. Here is what the share
+screen looks like:
+
+![ScreenShot](https://raw.github.com/bfcam/phonegap-ios-social-plugin/master/screenshot.png)
 
 ## CREDITS ##
 
