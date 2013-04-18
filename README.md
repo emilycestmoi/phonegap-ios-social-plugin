@@ -35,11 +35,13 @@ by [Cameron Lerch](http://brightflock.com)
 Within your Cordova app check to see if Social can even be used--it required iOS6+. Do this:
 
 ```
-if (window.plugins.social.available()) {
-  // Show social widgets
-} else {
-  // Social not supported
-}
+window.plugins.social.available(function(avail) {
+  if (avail) {
+    // Show social widgets
+  } else {
+    // Social not supported
+  }
+});
 ```
 
 ## SHARING ##
@@ -47,7 +49,7 @@ if (window.plugins.social.available()) {
 Once you have checked that Social is available you can allow for sharing. To do this setup a button within your Cordova app that when triggered does something like this:
 
 ```
-window.plugins.social.share('This is the message you want to share', 'http://someurl.com', '/local_image.jpg');
+window.plugins.social.share('This is the message you want to share', 'http://someurl.com', 'www/image/local_image.jpg');
 ```
 
 The message and url are trivial. The image is a file on the device itself. I actually haven't tested passing an image url to see if the social framework
