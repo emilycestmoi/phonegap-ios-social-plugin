@@ -15,9 +15,13 @@ Social.prototype.available = function(callback) {
 };
 
 Social.prototype.share = function(message, url, image) {
-    cordova.exec(null, null, "Social", "share", [message, image, url]);
+		cordova.exec(null, null, "Social", "share", [message, image, url]);
 };
-    
+
+Social.prototype.shareA = function(service, message, url, image) {
+		cordova.exec(null, null, "Social", "shareA", [service, message, image, url]);
+};
+
 Social.install = function() {
     if (!window.plugins) {
         window.plugins = {};	
