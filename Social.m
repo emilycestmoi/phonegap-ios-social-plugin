@@ -93,14 +93,16 @@ else if ([serviceType isEqual: @"SinaWeibo"])
 		else
 				return;
 
-		if([SLComposeViewController isAvailableForServiceType:serviceType]) {
+// Uncomment the following conditional if you want to perform your own action in case serviceType account is not present.
+// Otherwise, we will let the OS display its own dialog.
+//		if([SLComposeViewController isAvailableForServiceType:serviceType]) {
 				SLComposeViewController*serviceViewController = [SLComposeViewController
 																																			composeViewControllerForServiceType:serviceType];
 				[serviceViewController setInitialText:text];
 				[serviceViewController addImage:image];
 				[serviceViewController addURL:url];
 				[self.viewController presentViewController:serviceViewController animated:YES completion:nil];
-		}
+		//		}
 }
 
 @end
