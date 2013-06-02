@@ -4,7 +4,10 @@
 //  Cameron Lerch
 //  Sponsored by Brightflock: http://brightflock.com
 //
+// Enhanced by Victor Tsaran: http://www.victortsaran.net
 
+#import <Social/SLComposeViewController.h>
+#import <Social/SLServiceTypes.h>
 #import "Social.h"
 
 @interface Social ()
@@ -54,7 +57,52 @@
     UIActivityViewController *activityVC =
     [[UIActivityViewController alloc] initWithActivityItems:activityItems
                                       applicationActivities:applicationActivities];
+		activityVC.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeSaveToCameraRoll];
+
     [self.viewController presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (void)shareA:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+		if (!NSClassFromString(@"SLComposeViewController")) {
+				return;
+		}
+
+		NSString *serviceType = [arguments objectAtIndex:1];
+		NSString *text = [arguments objectAtIndex:2];
+
+		NSString *imageName = [arguments objectAtIndex:3];
+		UIImage *image = nil;
+
+		if (imageName) {
+				image = [UIImage imageNamed:imageName];
+		}
+
+		NSString *urlString = [arguments objectAtIndex:4];
+		NSURL *url = nil;
+
+		if (urlString) {
+				url = [NSURL URLWithString:urlString];
+		}
+
+		if ([serviceType isEqual: @"Twitter"])
+				serviceType = SLServiceTypeTwitter;
+else if ([serviceType isEqual: @"Facebook"])
+		serviceType = SLServiceTypeFacebook;
+else if ([serviceType isEqual: @"SinaWeibo"])
+		serviceType = SLServiceTypeSinaWeibo;
+		else
+				return;
+
+// Uncomment the following conditional if you want to perform your own action in case serviceType account is not present.
+// Otherwise, we will let the OS display its own dialog.
+//		if([SLComposeViewController isAvailableForServiceType:serviceType]) {
+				SLComposeViewController*serviceViewController = [SLComposeViewController
+																																			composeViewControllerForServiceType:serviceType];
+				[serviceViewController setInitialText:text];
+				[serviceViewController addImage:image];
+				[serviceViewController addURL:url];
+				[self.viewController presentViewController:serviceViewController animated:YES completion:nil];
+		//		}
 }
 
 @end
