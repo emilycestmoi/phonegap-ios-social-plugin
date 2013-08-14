@@ -8,7 +8,7 @@
     <description>Cordova Social Plugin</description>
     <license>Apache</license>
     <keywords>cordova,social,sharing</keywords>
-    <js-module src="www/social.js" name="Social">
+    <js-module src="social.js" name="Social">
         <clobbers target="Social" />
     </js-module>
 
