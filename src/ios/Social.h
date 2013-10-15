@@ -11,8 +11,8 @@
 @interface Social : CDVPlugin {
 }
 
-- (void)available:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+-(void)available:(CDVInvokedUrlCommand*)command;
 
-- (void)share:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+- (void)share:(CDVInvokedUrlCommand*)command;
 
 @end

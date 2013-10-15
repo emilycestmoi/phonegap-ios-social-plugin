@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.custom.plugin.social"
+    version="1.0.0">
+
+    <name>Social</name>
+
+    <asset src="www/social.js" target="social.js" />
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/widget/plugins">
+          <feature name="Social">
+            <param name="ios-package" value="Social" />
+          </feature>
+        </config-file>
+
+        <header-file src="src/ios/Social.h" /> 
+        <source-file src="src/ios/Social.m" /> 
+
+    </platform>
+
+  <framework src="Social.framework" weak="true" />
+
+</plugin>

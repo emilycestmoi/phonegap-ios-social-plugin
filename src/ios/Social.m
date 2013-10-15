@@ -13,8 +13,11 @@
 
 @implementation Social
 
-- (void)available:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+- (void)available:(CDVInvokedUrlCommand*)command {
+
     BOOL avail = false;
+
+    NSArray *arguments = command.arguments;
     
     if (NSClassFromString(@"UIActivityViewController")) {
         avail = true;
@@ -24,28 +27,31 @@
     [self writeJavascript:[pluginResult toSuccessCallbackString:[arguments objectAtIndex:0]]];
 }
 
-- (void)share:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+- (void)share:(CDVInvokedUrlCommand*)command {
     
     if (!NSClassFromString(@"UIActivityViewController")) {
         return;
     }
     
-    NSString *text = [arguments objectAtIndex:1];
+    NSArray *arguments = command.arguments;
     
-    NSString *imageName = [arguments objectAtIndex:2];
+    NSString *text = [arguments objectAtIndex:0];
+    
+    NSString *imageName = [arguments objectAtIndex:1];
     UIImage *image = nil;
     
-    if (imageName) {
+    if (imageName != (id)[NSNull null]) {
         image = [UIImage imageNamed:imageName];
     }
-    
-    NSString *urlString = [arguments objectAtIndex:3];
+
+
+    NSString *urlString = [arguments objectAtIndex:2];
     NSURL *url = nil;
-    
-    if (urlString) {
+
+    if (urlString != (id)[NSNull null]) {
         url = [NSURL URLWithString:urlString];
     }
-    
+   
     NSArray *activityItems = [[NSArray alloc] initWithObjects:text, image, url, nil];
     
     UIActivity *activity = [[UIActivity alloc] init];
@@ -54,6 +60,7 @@
     UIActivityViewController *activityVC =
     [[UIActivityViewController alloc] initWithActivityItems:activityItems
                                       applicationActivities:applicationActivities];
+    
     [self.viewController presentViewController:activityVC animated:YES completion:nil];
 }
 
